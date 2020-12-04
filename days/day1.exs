@@ -1,7 +1,8 @@
 defmodule Day1 do
-  def run do
+  def run(input) do
     processed_input =
-      File.stream!("daily/inputs/day1.txt")
+      input
+      |> File.stream!()
       |> Stream.map(&String.trim/1)
       |> Enum.map(&String.to_integer/1)
 
@@ -37,4 +38,4 @@ defmodule Day1 do
   defp find_sum(target, val1, [_val2 | pool]), do: find_sum(target, val1, pool)
 end
 
-Day1.run()
+Day1.run("inputs/day1.txt")

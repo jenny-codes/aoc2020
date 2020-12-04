@@ -1,7 +1,7 @@
 defmodule Day2 do
-  def run do
+  def run(input) do
     formatted_input =
-      "daily/inputs/day2.txt"
+      input
       |> File.stream!()
       |> Stream.map(&String.trim/1)
       |> Stream.map(&parse/1)
@@ -57,4 +57,4 @@ defmodule Day2 do
   end
 end
 
-Day2.run()
+Day2.run("inputs/day2.txt")
