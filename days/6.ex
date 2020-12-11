@@ -55,5 +55,3 @@ defmodule Day6 do
     end)
   end
 end
-
-Day6.run("days/inputs/day6.txt")

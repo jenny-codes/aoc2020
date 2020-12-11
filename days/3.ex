@@ -74,10 +74,11 @@ end
 
 defmodule Day3 do
   def run(input) do
-    grid = input
-    |> File.stream!()
-    |> Stream.map(&String.trim/1)
-    |> Grid.draw()
+    grid =
+      input
+      |> File.stream!()
+      |> Stream.map(&String.trim/1)
+      |> Grid.draw()
 
     grid
     |> Grid.traverse_and_collect({3, 1})
@@ -89,5 +90,3 @@ defmodule Day3 do
     |> IO.inspect(label: "Result2")
   end
 end
-
-Day3.run("days/inputs/day3.txt")

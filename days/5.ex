@@ -57,12 +57,11 @@ defmodule Day5 do
     min = Enum.min(seat_ids)
     max = Enum.max(seat_ids)
 
-    [missing_num] = Enum.reject(min..max, fn i ->
-      i in seat_ids
-    end)
+    [missing_num] =
+      Enum.reject(min..max, fn i ->
+        i in seat_ids
+      end)
 
     missing_num
   end
 end
-
-Day5.run("days/inputs/day5.txt")
