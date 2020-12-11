@@ -2,46 +2,25 @@ defmodule XMAS do
   @doc """
     Apparantly it's "eXchange-Masking Addition System"
   """
-
-  def build(input) do
-    input
-    |> Stream.map(&String.to_integer/1)
-    |> Stream.with_index()
-    |> Map.new(fn {num, idx} -> {idx, num} end)
+  def find_invalid(xmas, preamble: preamble) do
+    xmas
+    |> Util.normalize(to: :indexed_map)
+    |> find_invalid(0, preamble)
   end
 
-  def find_first_invalid(xmas, preamble: preamble) do
-    find_first_invalid(xmas, 0, preamble)
-  end
-
-  defp find_first_invalid(xmas, ptr, preamble) do
-    if is_valid(xmas, ptr, preamble) do
-      find_first_invalid(xmas, ptr + 1, preamble)
+  defp find_invalid(xmas_map, ptr, preamble) do
+    if is_valid(xmas_map, ptr, preamble) do
+      find_invalid(xmas_map, ptr + 1, preamble)
     else
-      xmas[ptr]
+      xmas_map[ptr]
     end
   end
 
   defp is_valid(_xmas, key, preamble) when key < preamble, do: true
 
-  defp is_valid(xmas, key, preamble) do
-    Enum.map((key - preamble)..(key - 1), &xmas[&1])
-    |> find_two_sum(xmas[key])
-  end
-
-  defp find_two_sum(pool, target) do
-    IO.inspect(target, label: "Finding two sum for")
-    find_two_sum(tl(pool), hd(pool), target)
-  end
-
-  defp find_two_sum([], _pinned_candidate, _target), do: false
-
-  defp find_two_sum(pool, pinned_candidate, target) do
-    [second_candidate | tail] = pool
-
-    pinned_candidate + second_candidate == target ||
-      find_two_sum(tail, pinned_candidate, target) ||
-      find_two_sum(tail, second_candidate, target)
+  defp is_valid(xmas_map, key, preamble) do
+    pool = Enum.map((key - preamble)..(key - 1), &xmas_map[&1])
+    is_list(TwoSum.find(pool, xmas_map[key]))
   end
 end
 
@@ -49,18 +28,19 @@ defmodule Day9 do
   def run(input) do
     xmas =
       input
-      |> File.stream!()
-      |> Stream.map(&String.trim/1)
-      |> XMAS.build()
+      |> File.stream!
+      |> Util.normalize(to: :list, item: :integer)
 
-    # xmas
-    # |> XMAS.find_first_invalid(preamble: 25)
-    # |> IO.inspect(label: "Result1")
+    result1 =
+      xmas
+      |> XMAS.find_invalid(preamble: 25)
 
-    xmas
-    |> MultiSum.find_continuous(1_212_510_616)
-    |> Enum.min_max()
-    |> (fn {min, max} -> min + max end).()
-    |> IO.inspect(label: "Result2")
+    result2 =
+      xmas
+      |> MultiSum.find_continuous(result1)
+      |> Enum.min_max()
+      |> (fn {min, max} -> min + max end).()
+
+    {result1, result2}
   end
 end

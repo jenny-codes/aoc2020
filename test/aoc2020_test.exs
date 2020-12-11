@@ -34,7 +34,11 @@ defmodule Aoc2020Test do
     assert true
   end
 
+  @tag :today
   test "day9" do
-    assert true
+    {result1, result2} = Aoc2020.day9()
+
+    assert result1 == 1_212_510_616
+    assert result2 == 171_265_123
   end
 end
