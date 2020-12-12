@@ -1,5 +1,16 @@
 defmodule Util do
   @doc """
+    Example usages:
+      Util.normalize_file(file, to: :list, item: :integer)
+      Util.normalize_file(file, to: :indexed_map)
+  """
+  def normalize_file(file, args) do
+    file
+    |> File.stream!()
+    |> normalize(args)
+  end
+
+  @doc """
     ## Examples
 
       iex> Util.normalize(["1", "2", "3"], to: :list, item: :integer)
