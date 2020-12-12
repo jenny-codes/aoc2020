@@ -82,11 +82,13 @@ defmodule Day3 do
 
     grid
     |> Grid.traverse_and_collect({3, 1})
-    |> IO.inspect(label: "Result1")
+    |> IO.inspect(label: "Puzzle 1")
 
     [{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}]
     |> Enum.map(fn slope -> Grid.traverse_and_collect(grid, slope) end)
     |> Enum.reduce(&(&1 * &2))
-    |> IO.inspect(label: "Result2")
+    |> IO.inspect(label: "Puzzle 2")
   end
 end
+
+Day3.run("days/inputs/3.txt")

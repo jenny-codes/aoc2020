@@ -55,3 +55,5 @@ defmodule Day6 do
     end)
   end
 end
+
+Day6.run("days/inputs/6.txt")

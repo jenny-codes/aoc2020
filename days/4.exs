@@ -123,3 +123,5 @@ defmodule Day4 do
     {String.to_atom(key), value}
   end
 end
+
+Day4.run("days/inputs/4.txt")

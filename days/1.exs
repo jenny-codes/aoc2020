@@ -37,3 +37,5 @@ defmodule Day1 do
   defp find_sum(target, val1, [val2 | _pool]) when val1 + val2 == target, do: [val1, val2]
   defp find_sum(target, val1, [_val2 | pool]), do: find_sum(target, val1, pool)
 end
+
+Day1.run("days/inputs/1.txt")

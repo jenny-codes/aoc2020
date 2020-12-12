@@ -101,3 +101,5 @@ defmodule Day8 do
     |> IO.inspect(label: "Result2")
   end
 end
+
+Day8.run("days/inputs/8.txt")

@@ -123,11 +123,13 @@ defmodule Day7 do
     |> BagIndex.V1.build()
     |> BagIndex.V1.recursive_find_outside_colors("shiny gold")
     |> MapSet.size()
-    |> IO.inspect(label: "Result1")
+    |> IO.inspect(label: "Puzzle 1")
 
     sanitized_input
     |> BagIndex.V2.build()
     |> BagIndex.V2.find_required_bags_count("shiny gold")
-    |> IO.inspect(label: "Result2")
+    |> IO.inspect(label: "Puzzle 2")
   end
 end
+
+Day7.run("days/inputs/7.txt")

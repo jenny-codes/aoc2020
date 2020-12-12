@@ -25,22 +25,19 @@ defmodule XMAS do
 end
 
 defmodule Day9 do
-  def run(input) do
-    xmas =
-      input
-      |> File.stream!
-      |> Util.normalize(to: :list, item: :integer)
+  def run(input_path) do
+    xmas = Util.normalize_file(input_path, to: :list, item: :integer)
 
-    result1 =
-      xmas
-      |> XMAS.find_invalid(preamble: 25)
+    xmas
+    |> XMAS.find_invalid(preamble: 25)
+    |> IO.inspect(label: "Puzzle 1")
 
-    result2 =
-      xmas
-      |> MultiSum.find_continuous(result1)
-      |> Enum.min_max()
-      |> (fn {min, max} -> min + max end).()
-
-    {result1, result2}
+    xmas
+    |> MultiSum.find_continuous(result1)
+    |> Enum.min_max()
+    |> (fn {min, max} -> min + max end).()
+    |> IO.inspect(label: "Puzzle 2")
   end
 end
+
+Day9.run("days/inputs/9.txt")

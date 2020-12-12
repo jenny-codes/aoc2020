@@ -65,3 +65,5 @@ defmodule Day5 do
     missing_num
   end
 end
+
+Day5.run("days/inputs/5.txt")
