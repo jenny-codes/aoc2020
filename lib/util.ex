@@ -1,11 +1,11 @@
 defmodule Util do
   @doc """
     Example usages:
-      Util.normalize_file(file, to: :list, item: :integer)
-      Util.normalize_file(file, to: :indexed_map)
+      Util.parse_file(file, to: :list, item: :integer)
+      Util.parse_file(file, to: :indexed_map)
   """
-  def normalize_file(file, args) do
-    file
+  def parse_file(file_path, args) do
+    file_path
     |> File.stream!()
     |> normalize(args)
   end
@@ -13,8 +13,11 @@ defmodule Util do
   @doc """
     ## Examples
 
-      iex> Util.normalize(["1", "2", "3"], to: :list, item: :integer)
+      iex> Util.normalize(["1", "2", "3"], to: :list, item: :integer) |> Enum.to_list()
       [1, 2, 3]
+
+      iex> Util.normalize(["1", "2", "3"], to: :list) |> Enum.to_list()
+      ["1", "2", "3"]
 
       iex> Util.normalize(["1", "2", "3"], to: :indexed_map)
       %{0 => "1", 1 => "2", 2 => "3"}
@@ -22,7 +25,11 @@ defmodule Util do
   def normalize(raw_input, to: :list, item: :integer) do
     raw_input
     |> Stream.map(&String.trim/1)
-    |> Enum.map(&String.to_integer/1)
+    |> Stream.map(&String.to_integer/1)
+  end
+
+  def normalize(raw_input, to: :list) do
+    Stream.map(raw_input, &String.trim/1)
   end
 
   def normalize(raw_input, to: :indexed_map) do
