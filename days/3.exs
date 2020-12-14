@@ -1,41 +1,19 @@
-defmodule Grid do
+defmodule TreeGrid do
   @moduledoc """
     Top left is starting point {0, 0}
     One position to the right is {1, 0}
     One position downward is {0, 1}
   """
-
-  @doc """
-  Output format:
-
-  %{
-    1 => {1 => ".", 2 => "#"},
-    2 => {1 => ".", 2 => "#"},
-    ...
-  }
-  """
-  def draw(input) do
-    input
-    |> Stream.with_index()
-    |> Stream.map(fn {line, y_idx} ->
-      x_values =
-        line
-        |> String.split("", trim: true)
-        |> Stream.with_index()
-        |> Stream.map(fn {char, x_idx} -> {x_idx, char} end)
-        |> Map.new()
-
-      {y_idx, x_values}
-    end)
-    |> Map.new()
+  def build(input) do
+    Grid.build(input)
   end
 
-  def traverse_and_collect(grid, slope) do
-    traverse_and_collect(grid, fetch_boundries(grid), slope, 0, {0, 0})
+  def traverse_and_collect(tree_grid, slope) do
+    traverse_and_collect(tree_grid, Grid.boundary(tree_grid), slope, 0, {0, 0})
   end
 
   def traverse_and_collect(
-        grid,
+        tree_grid,
         {x_boundry, y_boundry},
         {right_step, down_step},
         curr_count,
@@ -45,7 +23,7 @@ defmodule Grid do
       curr_count
     else
       next_count =
-        if grid[curr_y][curr_x] == "#" do
+        if Grid.fetch(tree_grid, {curr_x, curr_y}) == "#" do
           curr_count + 1
         else
           curr_count
@@ -55,7 +33,7 @@ defmodule Grid do
       next_y = curr_y + down_step
 
       traverse_and_collect(
-        grid,
+        tree_grid,
         {x_boundry, y_boundry},
         {right_step, down_step},
         next_count,
@@ -63,32 +41,26 @@ defmodule Grid do
       )
     end
   end
-
-  defp fetch_boundries(grid) do
-    x_boundry = grid[0] |> Enum.count()
-    y_boundry = grid |> Enum.count()
-
-    {x_boundry, y_boundry}
-  end
 end
 
 defmodule Day3 do
-  def run(input) do
-    grid =
-      input
-      |> File.stream!()
-      |> Stream.map(&String.trim/1)
-      |> Grid.draw()
+  def run(input_path) do
+    tree_grid =
+      input_path
+      |> Util.parse_file(to: :list)
+      |> Stream.map(&String.split(&1, "", trim: true))
+      |> TreeGrid.build()
 
-    grid
-    |> Grid.traverse_and_collect({3, 1})
-    |> IO.inspect(label: "Puzzle 1")
+    result1 = TreeGrid.traverse_and_collect(tree_grid, {3, 1})
 
-    [{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}]
-    |> Enum.map(fn slope -> Grid.traverse_and_collect(grid, slope) end)
-    |> Enum.reduce(&(&1 * &2))
-    |> IO.inspect(label: "Puzzle 2")
+    result2 =
+      [{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}]
+      |> Enum.map(fn slope -> TreeGrid.traverse_and_collect(tree_grid, slope) end)
+      |> Enum.reduce(&(&1 * &2))
+
+    {result1, result2}
   end
 end
 
 Day3.run("days/inputs/3.txt")
+|> IO.inspect()
