@@ -54,9 +54,9 @@ defmodule GridTest do
     end
   end
 
-  describe "all_positions/1" do
+  describe "positions/1" do
     test "returns all the positions in a grid, order not guaranteed", context do
-      all_pos = Grid.all_positions(context[:grid])
+      all_pos = Grid.positions(context[:grid])
 
       expected = [
         {0, 0},
@@ -71,6 +71,16 @@ defmodule GridTest do
       ]
 
       assert MapSet.new(all_pos) == MapSet.new(expected)
+    end
+  end
+
+  describe "values/1" do
+    test "returns all the values in a grid, order not guaranteed", context do
+      values = Grid.values(context[:grid])
+
+      expected = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
+
+      assert MapSet.new(values) == MapSet.new(expected)
     end
   end
 

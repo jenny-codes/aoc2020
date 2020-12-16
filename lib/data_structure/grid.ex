@@ -30,8 +30,8 @@ defmodule Grid do
     |> Map.new()
   end
 
-  def fetch(grid, index) do
-    grid[index]
+  def fetch(grid, pos) do
+    grid[pos]
   end
 
   @doc """
@@ -44,12 +44,16 @@ defmodule Grid do
     {x_axis_boundary, y_axis_boundary}
   end
 
-  def put(grid, index, new_val) do
-    Map.put(grid, index, new_val)
+  def put(grid, pos, new_val) do
+    Map.put(grid, pos, new_val)
   end
 
-  def all_positions(grid) do
+  def positions(grid) do
     Map.keys(grid)
+  end
+
+  def values(grid) do
+    Map.values(grid)
   end
 
   def map(grid, fun) do
