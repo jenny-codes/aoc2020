@@ -42,6 +42,7 @@ defmodule MathUtil do
 
   # ===========================================
   # Chinese Remainder Theorem
+  # Ref: https://en.wikipedia.org/wiki/Chinese_remainder_theorem#Using_the_existence_construction
   # ===========================================
   @spec crt([{integer(), integer()}]) :: integer()
   def crt(input) do
