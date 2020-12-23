@@ -26,7 +26,7 @@ end
 
 defmodule Day9 do
   def run(input_path) do
-    xmas = Util.normalize_file(input_path, to: :list, item: :integer)
+    xmas = Util.parse_file(input_path, to: :list, item: :integer)
 
     xmas
     |> XMAS.find_invalid(preamble: 25)
