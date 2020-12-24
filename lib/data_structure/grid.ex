@@ -20,8 +20,8 @@ defmodule Grid do
   """
   def build(input) do
     input
-    |> Stream.map(&ListUtil.transform(&1, to: :indexed_map))
-    |> ListUtil.transform(to: :indexed_map)
+    |> Stream.map(&EnumUtil.to_indexed_map/1)
+    |> EnumUtil.to_indexed_map()
     |> Enum.flat_map(fn {y_idx, x_ary} ->
       Enum.map(x_ary, fn {x_idx, val} ->
         {{x_idx, y_idx}, val}

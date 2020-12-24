@@ -37,7 +37,7 @@ defmodule Day13 do
           int_str -> String.to_integer(int_str)
         end
       end)
-      |> ListUtil.transform(to: :indexed_map)
+      |> EnumUtil.to_indexed_map()
 
     {target, intervals}
   end

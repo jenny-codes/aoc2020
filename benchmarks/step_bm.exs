@@ -2,7 +2,7 @@ defmodule StepBm do
   def run_with_test_data do
     input =
       FileUtil.parse("days/inputs/10_test.txt")
-      |> ListUtil.transform(element: :integer)
+      |> EnumUtil.transform_element(Integer, lazy: true)
       |> Enum.sort()
 
     Benchee.run(
@@ -22,7 +22,7 @@ defmodule StepBm do
   def run do
     input =
       FileUtil.parse("days/inputs/10.txt")
-      |> ListUtil.transform(element: :integer)
+      |> EnumUtil.transform_element(Integer, lazy: true)
       |> Enum.sort()
 
     Benchee.run(

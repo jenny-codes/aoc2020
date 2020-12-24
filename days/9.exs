@@ -4,7 +4,7 @@ defmodule XMAS do
   """
   def find_invalid(xmas, preamble: preamble) do
     xmas
-    |> ListUtil.transform(to: :indexed_map)
+    |> EnumUtil.to_indexed_map()
     |> find_invalid(0, preamble)
   end
 
@@ -29,7 +29,7 @@ defmodule Day9 do
     xmas =
       input_path
       |> FileUtil.parse()
-      |> ListUtil.tranform(element: :integer)
+      |> EnumUtil.tranform_element(Integer, lazy: false)
 
     xmas
     |> XMAS.find_invalid(preamble: 25)

@@ -3,8 +3,7 @@ defmodule Day10 do
     parsed =
       input_path
       |> FileUtil.parse()
-      |> ListUtil.transform(element: :integer)
-      |> Enum.to_list()
+      |> EnumUtil.transform_element(Integer, lazy: true)
       |> add_init_values()
       |> Enum.sort()
 
