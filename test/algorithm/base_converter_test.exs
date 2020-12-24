@@ -1,7 +1,7 @@
-defmodule MathUtil.BaseConverterTest do
+defmodule BaseConverterTest do
   use ExUnit.Case
-  doctest MathUtil.BaseConverter
-  alias MathUtil.BaseConverter
+  doctest BaseConverter
+  alias BaseConverter
 
   describe "from_base2" do
     test "by defaults converts num from base2 to base10" do

@@ -26,20 +26,4 @@ defmodule MathUtilTest do
       assert MathUtil.lcm([3, 4, 5, 6]) == 60
     end
   end
-
-  describe "ext_euclid" do
-    test "works" do
-      assert MathUtil.ext_euclid(240, 46) == {2, -9, 47}
-      assert MathUtil.ext_euclid(3, 5) == {1, 2, -1}
-      assert MathUtil.ext_euclid(5369, 31) == {1, -5, 866}
-    end
-  end
-
-  describe "crt" do
-    test "works" do
-      assert MathUtil.crt([{0, 3}, {3, 4}, {4, 5}]) == 39
-      assert MathUtil.crt([{2, 3}, {3, 5}, {2, 7}]) == 23
-      assert MathUtil.crt([{2, 3}, {3, 5}, {2, 7}, {1, 11}, {10, 13}]) == 23
-    end
-  end
 end

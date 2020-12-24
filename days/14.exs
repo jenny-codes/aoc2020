@@ -24,10 +24,10 @@ defmodule BitMask.V1 do
     new_val =
       val
       |> String.to_integer()
-      |> MathUtil.BaseConverter.to_base2()
+      |> BaseConverter.to_base2()
       |> Integer.to_string()
       |> apply_mask(mask)
-      |> MathUtil.BaseConverter.from_base2()
+      |> BaseConverter.from_base2()
       |> Integer.to_string()
 
     new_mem = Map.put(mem, loc, new_val)
@@ -88,7 +88,7 @@ defmodule BitMask.V2 do
     new_locs =
       loc
       |> String.to_integer()
-      |> MathUtil.BaseConverter.to_base2()
+      |> BaseConverter.to_base2()
       |> Integer.to_string()
       |> apply_mask(mask)
 

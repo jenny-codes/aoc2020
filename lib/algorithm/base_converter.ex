@@ -1,4 +1,4 @@
-defmodule MathUtil.BaseConverter do
+defmodule BaseConverter do
   def from_base2(num), do: from_base2(num, to: :base10)
 
   def from_base2(num, to: :base10) do
