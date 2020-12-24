@@ -102,7 +102,7 @@ defmodule Day12 do
   def run(file_path) do
     inst_list =
       file_path
-      |> Util.parse_file(to: :list)
+      |> FileUtil.parse()
       |> Navigator.build_instructions()
 
     {end_pos_v1, _} = Navigator.run_instructions(inst_list, {0, 0}, "E", ver: :v1)

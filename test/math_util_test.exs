@@ -1,7 +1,7 @@
 defmodule MathUtilTest do
   use ExUnit.Case
 
-    describe "gcd" do
+  describe "gcd" do
     test "works with a list" do
       assert MathUtil.gcd([1, 3]) == 1
       assert MathUtil.gcd([2, 3]) == 1

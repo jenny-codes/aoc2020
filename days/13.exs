@@ -4,7 +4,7 @@ defmodule Day13 do
   Also implemented Extended Euclidean algorithm in the implementation of CRT.
   """
   def run(file_path) do
-    {target, intervals} = Util.parse_file(file_path, to: :list) |> Enum.to_list() |> normalize
+    {target, intervals} = FileUtil.parse(file_path) |> Enum.to_list() |> normalize
 
     # Puzzle 1
     result1 =
@@ -37,7 +37,7 @@ defmodule Day13 do
           int_str -> String.to_integer(int_str)
         end
       end)
-      |> Util.normalize(to: :indexed_map)
+      |> ListUtil.transform(to: :indexed_map)
 
     {target, intervals}
   end

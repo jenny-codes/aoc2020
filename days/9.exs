@@ -4,7 +4,7 @@ defmodule XMAS do
   """
   def find_invalid(xmas, preamble: preamble) do
     xmas
-    |> Util.normalize(to: :indexed_map)
+    |> ListUtil.transform(to: :indexed_map)
     |> find_invalid(0, preamble)
   end
 
@@ -26,7 +26,10 @@ end
 
 defmodule Day9 do
   def run(input_path) do
-    xmas = Util.parse_file(input_path, to: :list, item: :integer)
+    xmas =
+      input_path
+      |> FileUtil.parse()
+      |> ListUtil.tranform(element: :integer)
 
     xmas
     |> XMAS.find_invalid(preamble: 25)

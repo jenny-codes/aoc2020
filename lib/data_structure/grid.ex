@@ -20,8 +20,8 @@ defmodule Grid do
   """
   def build(input) do
     input
-    |> Stream.map(&Util.normalize(&1, to: :indexed_map))
-    |> Util.normalize(to: :indexed_map)
+    |> Stream.map(&ListUtil.transform(&1, to: :indexed_map))
+    |> ListUtil.transform(to: :indexed_map)
     |> Enum.flat_map(fn {y_idx, x_ary} ->
       Enum.map(x_ary, fn {x_idx, val} ->
         {{x_idx, y_idx}, val}
@@ -38,8 +38,8 @@ defmodule Grid do
     Returns the boundary of grid on x axis and y axis respectively.
   """
   def boundary(grid) do
-    x_axis_boundary = grid |> Map.keys() |> Enum.map(&elem(&1, 0)) |> Enum.max
-    y_axis_boundary = grid |> Map.keys() |> Enum.map(&elem(&1, 1)) |> Enum.max
+    x_axis_boundary = grid |> Map.keys() |> Enum.map(&elem(&1, 0)) |> Enum.max()
+    y_axis_boundary = grid |> Map.keys() |> Enum.map(&elem(&1, 1)) |> Enum.max()
 
     {x_axis_boundary, y_axis_boundary}
   end

@@ -1,7 +1,9 @@
 defmodule Day10 do
   def run(input_path) do
     parsed =
-      Util.parse_file(input_path, to: :list, item: :integer)
+      input_path
+      |> FileUtil.parse()
+      |> ListUtil.transform(element: :integer)
       |> Enum.to_list()
       |> add_init_values()
       |> Enum.sort()

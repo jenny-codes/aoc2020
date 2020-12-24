@@ -1,7 +1,8 @@
 defmodule StepBm do
   def run_with_test_data do
     input =
-      Util.parse_file("days/inputs/10_test.txt", to: :list, item: :integer)
+      FileUtil.parse("days/inputs/10_test.txt")
+      |> ListUtil.transform(element: :integer)
       |> Enum.sort()
 
     Benchee.run(
@@ -20,7 +21,8 @@ defmodule StepBm do
   # the two difference implementations.
   def run do
     input =
-      Util.parse_file("days/inputs/10.txt", to: :list, item: :integer)
+      FileUtil.parse("days/inputs/10.txt")
+      |> ListUtil.transform(element: :integer)
       |> Enum.sort()
 
     Benchee.run(

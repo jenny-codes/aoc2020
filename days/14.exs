@@ -140,7 +140,7 @@ end
 
 defmodule Day14 do
   def run(input_path) do
-    input = Util.parse_file(input_path, to: :list)
+    input = FileUtil.parse(input_path)
     result1 = process_answer(input, BitMask.V1)
     result2 = process_answer(input, BitMask.V2)
 

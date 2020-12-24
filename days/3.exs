@@ -47,7 +47,7 @@ defmodule Day3 do
   def run(input_path) do
     tree_grid =
       input_path
-      |> Util.parse_file(to: :list)
+      |> FileUtil.parse()
       |> Stream.map(&String.split(&1, "", trim: true))
       |> TreeGrid.build()
 

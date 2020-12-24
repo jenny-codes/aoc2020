@@ -117,7 +117,8 @@ end
 defmodule Day11 do
   def run(input_path) do
     seating_system =
-      Util.parse_file(input_path, to: :list)
+      input_path
+      |> FileUtil.parse()
       |> Stream.map(&String.split(&1, "", trim: true))
       |> SeatingSystem.build()
 
