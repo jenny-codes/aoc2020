@@ -6,7 +6,7 @@ defmodule Grid do
   """
 
   @doc """
-    Takes a list of lists and returns a map of maps.
+    Takes a list of lists and returns a map with position {x, y} as key.
     Element at grid slot {1, 2} can be accessed by Grid.fetch(grid, 1, 2).
 
     ## Examples
